@@ -1,0 +1,17 @@
+{
+  "name": "FRC 8016 - 2026 REBUILT",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "/opt/wpilib/vscode-wpilib.vsix",
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-gradle",
+        "richardwillis.vscode-spotless-gradle"
+      ]
+    }
+  },
+  "postCreateCommand": "./gradlew --no-daemon compileJava"
+}
