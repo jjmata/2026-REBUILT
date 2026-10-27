@@ -13,6 +13,8 @@ import static edu.wpi.first.units.Units.Kilograms;
 import static edu.wpi.first.units.Units.Meters;
 import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RPM;
+import static edu.wpi.first.units.Units.RadiansPerSecond;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecondPerSecond;
 import static edu.wpi.first.units.Units.Seconds;
 
@@ -36,6 +38,7 @@ import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.units.measure.Mass;
 import edu.wpi.first.units.measure.Time;
+import frc.robot.generated.TunerConstants;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +52,41 @@ import java.util.Map;
  */
 public final class Constants {
     public static class SpindexerConstants {
-        public static final double SPINDEXER_SPEED = -0.5;
+        public static final LinearVelocity FEED_BUFFER = MetersPerSecond.of(0.5);
+        public static final Double SPINDEXER_REVERSE_SPEED = -0.5;
+        public static final double IS_READY_DELAY = 0.05;
+        public static final double PROPORTIONAL = 0;
+        public static final double INTEGRAL = 0;
+        public static final double DERIVATIVE = 0;
+        public static final int MAX_CURRENT = 50;
+        public static final LinearVelocity IDLE_SETPOINT = MetersPerSecond.of(0);
+        public static final double FEED_FORWARD_KS = 0.18053; // constants need to be updated
+        public static final double FEED_FORWARD_KV = 0.1229;
+        public static final double FEED_FORWARD_KA = 0.0086198;
+        public static final double SIM_FEED_FORWARD_KS = 0.0096372;
+        public static final double SIM_FEED_FORWARD_KV = 0.12421;
+        public static final double SIM_FEED_FORWARD_KA = 0.15227;
+        public static final Distance FLYWHEEL_DIAMETER = Inches.of(4);
+        public static final Mass FLYWHEEL_MASS = Kilograms.of(0.1);
+        public static final AngularVelocity SOFT_LIMIT = RPM.of(5000);
+        public static final AngularVelocity TRAPAZOIDAL_MAX_VELOCITY = RPM.of(5000);
+        public static final AngularAcceleration TRAPAZOIDAL_MAX_ACCELERATION =
+                RotationsPerSecondPerSecond.of(2500);
+        public static final Time CLOSED_LOOP_RAMP_RATE = Seconds.of(0.25);
+        public static final Time OPEN_LOOP_RAMP_RATE = Seconds.of(0.25);
+        public static final Current STATOR_CURRENT_LIMIT = Amps.of(40);
+    }
+
+    public static class SpeedConstants {
+        public static final double FullSpeed =
+                1 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+
+        public static final double SlowSpeed =
+                0.25 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+
+        public static final double FullAngularSpeed = RotationsPerSecond.of(1).in(RadiansPerSecond);
+        public static final double SlowAngularSpeed =
+                RotationsPerSecond.of(0.5).in(RadiansPerSecond);
     }
 
     public static class TurretConstants {
@@ -61,7 +98,7 @@ public final class Constants {
         public static final double MAX_VEL_RPM = 950;
         public static final double TX_TOLERANCE = 1;
         public static final int MAX_CURRENT = 50;
-        public static final double READY_TOLERANCE = 0.05;
+        public static final double READY_TOLERANCE = 1;
         public static final double FEED_FORWARD_KS = 0.18683;
         public static final double FEED_FORWARD_KV = 4.8891;
         public static final double FEED_FORWARD_KA = 0.83048;
@@ -76,18 +113,36 @@ public final class Constants {
         public static final Current STATOR_CURRENT_LIMIT = Amps.of(40);
         public static final double IS_READY_DELAY = 0.05;
         public static final Angle BOTTOM_SOFT_LIMIT = Degrees.of(0);
-        public static final Angle TOP_SOFT_LIMIT = Degrees.of(210);
+        public static final Angle TOP_SOFT_LIMIT = Degrees.of(180);
         public static final Distance TURRET_LENGTH = Inches.of(17.8);
         public static final Angle START_ANGLE = Degrees.of(0);
         public static final Mass TURRET_WEIGHT = Kilograms.of(10);
-        public static final Distance PIVOT_FORWARD = Inches.of(-7.25);
-        public static final Distance PIVOT_LEFT = Inches.of(8);
-        public static final Translation2d TURRET_OFFSET =
-                new Translation2d(PIVOT_FORWARD.in(Meters), PIVOT_LEFT.in(Meters));
     }
 
     public static class FeedConstants {
-        public static final double FEED_SPEED = 0.5;
+        public static final LinearVelocity FEED_BUFFER = MetersPerSecond.of(0.5);
+        public static final Double FEED_REVERSE_SPEED = -0.5;
+        public static final double IS_READY_DELAY = 0.05;
+        public static final double PROPORTIONAL = 0;
+        public static final double INTEGRAL = 0;
+        public static final double DERIVATIVE = 0;
+        public static final int MAX_CURRENT = 50;
+        public static final LinearVelocity IDLE_SETPOINT = MetersPerSecond.of(0);
+        public static final double FEED_FORWARD_KS = 0.23684;
+        public static final double FEED_FORWARD_KV = 0.11885;
+        public static final double FEED_FORWARD_KA = 0.012666;
+        public static final double SIM_FEED_FORWARD_KS = 0.0096372;
+        public static final double SIM_FEED_FORWARD_KV = 0.12421;
+        public static final double SIM_FEED_FORWARD_KA = 0.15227;
+        public static final Distance FLYWHEEL_DIAMETER = Inches.of(2);
+        public static final Mass FLYWHEEL_MASS = Kilograms.of(0.1);
+        public static final AngularVelocity SOFT_LIMIT = RPM.of(5000);
+        public static final AngularVelocity TRAPAZOIDAL_MAX_VELOCITY = RPM.of(5000);
+        public static final AngularAcceleration TRAPAZOIDAL_MAX_ACCELERATION =
+                RotationsPerSecondPerSecond.of(2500);
+        public static final Time CLOSED_LOOP_RAMP_RATE = Seconds.of(0.25);
+        public static final Time OPEN_LOOP_RAMP_RATE = Seconds.of(0.25);
+        public static final Current STATOR_CURRENT_LIMIT = Amps.of(40);
     }
 
     public static class ArmConstants {
@@ -132,7 +187,7 @@ public final class Constants {
         public static final double DERIVATIVE = 0;
         public static final int MAX_CURRENT = 50;
         public static final LinearVelocity IDLE_SETPOINT = MetersPerSecond.of(1);
-        public static final double READY_TOLERANCE = 0.05;
+        public static final double READY_TOLERANCE = 0.1;
         public static final double FEED_FORWARD_KS = 0.32135;
         public static final double FEED_FORWARD_KV = 0.11339;
         public static final double FEED_FORWARD_KA = 0.040276;
@@ -158,7 +213,7 @@ public final class Constants {
         public static final double DERIVATIVE = 0;
         public static final int MAX_CURRENT = 50;
         public static final LinearVelocity IDLE_SETPOINT = MetersPerSecond.of(1);
-        public static final double READY_TOLERANCE = 0.05;
+        public static final double READY_TOLERANCE = 0.1;
         public static final double FEED_FORWARD_KS = 0.15956;
         public static final double FEED_FORWARD_KV = 0.11947;
         public static final double FEED_FORWARD_KA = 0.013798;
@@ -180,9 +235,11 @@ public final class Constants {
     public static class TargetConstants {
         public static final Distance FIELD_LENGTH = Meters.of(Units.inchesToMeters(651.22));
         public static final Distance FIELD_HEIGHT = Meters.of(Units.inchesToMeters(317.69));
-        public static final Distance DRIVERSTATION_TO_TRENCH =
+        public static final Distance DRIVERSTATION_TO_ALLIANCE_SIDE =
                 Meters.of(Units.inchesToMeters(156.06));
-        public static final Distance ROBOT_WIDTH_WITH_BUMPERS = Meters.of(Units.inchesToMeters(33));
+        public static final Distance DRIVERSTATION_TO_TRENCH =
+                Meters.of(Units.inchesToMeters(182.11));
+        public static final Distance TURRET_TO_CLOSE_BUMPER = Meters.of(Units.inchesToMeters(8));
         public static final Pose3d HUB_TARGET_BLUE =
                 new Pose3d(
                         Units.inchesToMeters(182.11),
@@ -204,35 +261,41 @@ public final class Constants {
         // Distance (meters) → flywheel surface speed (m/s)
         public static final InterpolatingDoubleTreeMap FLYWHEEL_SPEED_MAP =
                 new InterpolatingDoubleTreeMap();
+        // Distance (meters) → TOF (s)
+        public static final InterpolatingDoubleTreeMap TIME_OF_FLIGHT =
+                new InterpolatingDoubleTreeMap();
 
         static {
-            // Values derived from original physics model (z = 1.4478 m hub height)
             HOOD_ANGLE_MAP.put(1.72, 67.0);
             HOOD_ANGLE_MAP.put(2.0, 67.0);
-            HOOD_ANGLE_MAP.put(2.5, 63.0);
-            HOOD_ANGLE_MAP.put(3.0, 63.0);
-            HOOD_ANGLE_MAP.put(3.5, 61.0);
-            HOOD_ANGLE_MAP.put(4.0, 60.0);
-            HOOD_ANGLE_MAP.put(4.5, 55.0);
-            HOOD_ANGLE_MAP.put(5.0, 57.0);
+            HOOD_ANGLE_MAP.put(2.5, 67.0); //
+            HOOD_ANGLE_MAP.put(3.0, 65.0); //
+            HOOD_ANGLE_MAP.put(3.5, 63.0); //
+            HOOD_ANGLE_MAP.put(4.0, 62.0); //
+            HOOD_ANGLE_MAP.put(4.5, 62.0); //
+            HOOD_ANGLE_MAP.put(5.0, 62.0);
             HOOD_ANGLE_MAP.put(5.5, 57.0);
             HOOD_ANGLE_MAP.put(6.0, 40.0);
             HOOD_ANGLE_MAP.put(7.0, 55.0);
             HOOD_ANGLE_MAP.put(8.0, 60.0);
 
-            // velocity = d * 0.5 + 7.5, clamped to [7.0, 13.0]
             FLYWHEEL_SPEED_MAP.put(1.72, 10.0);
             FLYWHEEL_SPEED_MAP.put(2.0, 10.5);
-            FLYWHEEL_SPEED_MAP.put(2.5, 11.0);
-            FLYWHEEL_SPEED_MAP.put(3.0, 12.0);
-            FLYWHEEL_SPEED_MAP.put(3.5, 12.1);
-            FLYWHEEL_SPEED_MAP.put(4.0, 12.9);
-            FLYWHEEL_SPEED_MAP.put(4.5, 13.0);
-            FLYWHEEL_SPEED_MAP.put(5.0, 14.0);
+            FLYWHEEL_SPEED_MAP.put(2.5, 11.5); //
+            FLYWHEEL_SPEED_MAP.put(3.0, 12.0); //
+            FLYWHEEL_SPEED_MAP.put(3.5, 12.0); //
+            FLYWHEEL_SPEED_MAP.put(4.0, 12.5); //
+            FLYWHEEL_SPEED_MAP.put(4.5, 13.25); //
+            FLYWHEEL_SPEED_MAP.put(5.0, 13.75); //
             FLYWHEEL_SPEED_MAP.put(5.5, 14.2);
             FLYWHEEL_SPEED_MAP.put(6.0, 16.0);
             FLYWHEEL_SPEED_MAP.put(7.0, 18.0);
             FLYWHEEL_SPEED_MAP.put(8.0, 20.0);
+
+            TIME_OF_FLIGHT.put(1.72, 0.9);
+            TIME_OF_FLIGHT.put(2.5, 1.1);
+            TIME_OF_FLIGHT.put(3.0, 1.2);
+            TIME_OF_FLIGHT.put(4.0, 1.25);
         }
     }
 
@@ -241,7 +304,7 @@ public final class Constants {
         public static final double INTEGRAL = 0;
         public static final double DERIVATIVE = 0;
         public static final int MAX_CURRENT = 50;
-        public static final double READY_TOLERANCE = 0.05;
+        public static final double READY_TOLERANCE = 0.1;
         public static final double FEED_FORWARD_KS = 0.029184;
         public static final double FEED_FORWARD_KG = 0.30625;
         public static final double FEED_FORWARD_KV = 6.8929;
