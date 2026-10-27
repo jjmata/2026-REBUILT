@@ -3,6 +3,24 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "features": {
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "vscode",
+      "webPort": "6080"
+    }
+  },
+  "containerEnv": {
+    "LIBGL_ALWAYS_SOFTWARE": "1",
+    "VNC_RESOLUTION": "1440x900x24"
+  },
+  "forwardPorts": [6080],
+  "portsAttributes": {
+    "6080": {
+      "label": "Robot simulation desktop (noVNC)",
+      "protocol": "http",
+      "onAutoForward": "notify"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
